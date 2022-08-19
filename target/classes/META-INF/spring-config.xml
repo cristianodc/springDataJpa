@@ -17,7 +17,7 @@
 	<!-- Define uma conexao com o banco de dados -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver"/>
-		<property name="url" value="jdbc.postgresql://localhost:5433/cursospringjpa"/>
+		<property name="url" value="jdbc:postgresql://localhost:5433/cursospringjpa"/>
 		<property name="username" value="postgres"/>
 		<property name="password" value="admin"/>
 		
