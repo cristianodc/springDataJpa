@@ -30,7 +30,7 @@ public class AppSpringDataTeste {
 		uso.setLogin("cicla");
 		uso.setSenha("123");
 		uso.setIdade(25);
-		uso.setNome("ciclano");
+		uso.setNome("ciclano_Ciclano");
 		
 		interfaceSpringRepoUser.save(uso);
 	}
@@ -84,4 +84,26 @@ public class AppSpringDataTeste {
 			  System.out.println("--------------------------------");
 		}
 	}
+	@Test
+	public void testBuscarPorNome() {
+		
+		 UsuarioSpringData uso =  interfaceSpringRepoUser.buscaPorParametro("Beltrano");
+		 System.out.println("Nome :"+uso.getNome());
+		  System.out.println("Email :"+uso.getEmail());
+		  System.out.println("Login :"+uso.getLogin());
+		  System.out.println("--------------------------------");
+	}
+	
+	@Test
+	public void testeDeletePorNome() {
+		interfaceSpringRepoUser.deletePorNome("ciclano");
+	}
+	
+	@Test
+	public void testUpdateEmail() {
+		String email = "cristianocoffy@bol.com.br";
+		String nome = "Coffy";
+		interfaceSpringRepoUser.updateEmail(email, nome);
+	}
+	
 }
