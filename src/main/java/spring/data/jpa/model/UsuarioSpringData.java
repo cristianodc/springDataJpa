@@ -4,13 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "usuariospringdata")
 public class UsuarioSpringData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;	
 	
+	private String nome;
 	private String login;
 	private String senha;
 	private String email;
@@ -45,5 +48,12 @@ public class UsuarioSpringData {
 	public void setIdade(int idade) {
 		this.idade = idade;
 	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getNome() {
+		return nome;
+	}
+	
 	
 }
