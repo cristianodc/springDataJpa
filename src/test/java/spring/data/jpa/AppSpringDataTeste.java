@@ -1,5 +1,6 @@
 package spring.data.jpa;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -25,11 +26,11 @@ public class AppSpringDataTeste {
 	@Test
 	public void testeInsert() {
 		UsuarioSpringData uso = new UsuarioSpringData();
-		uso.setEmail("cristianocoffy@gmail.com");
-		uso.setLogin("cris");
+		uso.setEmail("ciclano@gmail.com");
+		uso.setLogin("cicla");
 		uso.setSenha("123");
-		uso.setIdade(30);
-		uso.setNome("Panqueca");
+		uso.setIdade(25);
+		uso.setNome("ciclano");
 		
 		interfaceSpringRepoUser.save(uso);
 	}
@@ -59,5 +60,28 @@ public class AppSpringDataTeste {
 		data.setLogin("Fulano");
 		
 		interfaceSpringRepoUser.save(data);
+	}
+	
+	@Test
+	public void testeDelete() {
+		
+		interfaceSpringRepoUser.deleteById(5L);
+	}
+	@Test
+	public void testeDelete02() {
+		Optional<UsuarioSpringData> uso = interfaceSpringRepoUser.findById(3L);
+		interfaceSpringRepoUser.delete(uso.get());
+	}
+	
+	@Test
+	public void testConsultaNome() {
+		List<UsuarioSpringData> lista  = interfaceSpringRepoUser.buscaPorNome("ci");
+		
+		 for (UsuarioSpringData uso : lista) {
+			  System.out.println("Nome :"+uso.getNome());
+			  System.out.println("Email :"+uso.getEmail());
+			  System.out.println("Login :"+uso.getLogin());
+			  System.out.println("--------------------------------");
+		}
 	}
 }
