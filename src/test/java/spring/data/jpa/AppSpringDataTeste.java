@@ -6,10 +6,13 @@ import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import spring.data.jpa.dao.InterfaceSpringRepoUser;
+import spring.data.jpa.dao.InterfaceTelefone;
+import spring.data.jpa.model.Telefone;
 import spring.data.jpa.model.UsuarioSpringData;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,6 +21,8 @@ public class AppSpringDataTeste {
 	
 	@Autowired
 	private  InterfaceSpringRepoUser interfaceSpringRepoUser;
+	@Autowired
+	private InterfaceTelefone interfaceTelefone;
 	
 	@Test
 	public void testeTabela() {
@@ -26,8 +31,8 @@ public class AppSpringDataTeste {
 	@Test
 	public void testeInsert() {
 		UsuarioSpringData uso = new UsuarioSpringData();
-		uso.setEmail("ciclano@gmail.com");
-		uso.setLogin("cicla");
+		uso.setEmail("panqueca@gmail.com");
+		uso.setLogin("panqueca");
 		uso.setSenha("123");
 		uso.setIdade(25);
 		uso.setNome("ciclano_Ciclano");
@@ -36,9 +41,16 @@ public class AppSpringDataTeste {
 	}
 	@Test
 	public void consulta(){
-		Optional<UsuarioSpringData> uso = interfaceSpringRepoUser.findById(3L);
+		Optional<UsuarioSpringData> uso = interfaceSpringRepoUser.findById(10L);
 		 System.out.println("Nome :"+uso.get().getNome());
 		 System.out.println("Email :"+uso.get().getEmail());
+		 List<Telefone> lista = uso.get().getTelefones();
+		 
+		 for (Telefone telefone : uso.get().getTelefones()) {
+			System.out.println("Numero " + telefone.getNumero());
+		}
+			 
+		 	
 		}
 	
 	@Test
@@ -105,5 +117,13 @@ public class AppSpringDataTeste {
 		String nome = "Coffy";
 		interfaceSpringRepoUser.updateEmail(email, nome);
 	}
-	
+	@Test
+	public void testTelefone() {
+		Optional<UsuarioSpringData> uso = interfaceSpringRepoUser.findById(10L);
+		Telefone fone = new Telefone();
+		fone.setTipo("Celular");
+		fone.setNumero("51 7998798");
+		fone.setUsuarioSpringData(uso.get());
+		interfaceTelefone.save(fone);
+	}
 }
